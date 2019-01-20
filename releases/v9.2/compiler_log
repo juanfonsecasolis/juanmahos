@@ -1,0 +1,56 @@
+
+C:\Documents and Settings\Administrador\Escritorio\babel_9.1>set ruta_gnu="C:\Ar
+chivos de programa\CodeBlocks\MinGW\bin"
+
+C:\Documents and Settings\Administrador\Escritorio\babel_9.1>set ruta_nasm=C:\na
+sm
+
+C:\Documents and Settings\Administrador\Escritorio\babel_9.1>set gccflags= -c -m
+asm=intel -fno-builtin
+
+C:\Documents and Settings\Administrador\Escritorio\babel_9.1>C:\nasm\nasm -f elf
+ -o boot.o boot.asm
+
+C:\Documents and Settings\Administrador\Escritorio\babel_9.1>"C:\Archivos de pro
+grama\CodeBlocks\MinGW\bin"\g++  -c -masm=intel -fno-builtin -o main.o main.cpp
+
+
+C:\Documents and Settings\Administrador\Escritorio\babel_9.1>"C:\Archivos de pro
+grama\CodeBlocks\MinGW\bin"\g++  -c -masm=intel -fno-builtin -o ports.o ports.cp
+p
+
+C:\Documents and Settings\Administrador\Escritorio\babel_9.1>"C:\Archivos de pro
+grama\CodeBlocks\MinGW\bin"\g++  -c -masm=intel -fno-builtin -o video.o video.cp
+p
+
+C:\Documents and Settings\Administrador\Escritorio\babel_9.1>"C:\Archivos de pro
+grama\CodeBlocks\MinGW\bin"\g++  -c -masm=intel -fno-builtin -o sonido.o sonido.
+cpp
+
+C:\Documents and Settings\Administrador\Escritorio\babel_9.1>"C:\Archivos de pro
+grama\CodeBlocks\MinGW\bin"\g++  -c -masm=intel -fno-builtin -o matematica.o mat
+ematica.cpp
+
+C:\Documents and Settings\Administrador\Escritorio\babel_9.1>"C:\Archivos de pro
+grama\CodeBlocks\MinGW\bin"\g++  -c -masm=intel -fno-builtin -o hileras.o hilera
+s.cpp
+
+C:\Documents and Settings\Administrador\Escritorio\babel_9.1>"C:\Archivos de pro
+grama\CodeBlocks\MinGW\bin"\ld -T link.ld -o kernel.o boot.o main.o ports.o vide
+o.o hileras.o sonido.o matematica.o
+
+C:\Documents and Settings\Administrador\Escritorio\babel_9.1>"C:\Archivos de pro
+grama\CodeBlocks\MinGW\bin"\objcopy -R .note -R .comment -S -O binary kernel.o k
+ernel.bin
+
+C:\Documents and Settings\Administrador\Escritorio\babel_9.1>del *.o
+
+C:\Documents and Settings\Administrador\Escritorio\babel_9.1>del b:\BOOT\kernel.
+bin
+
+C:\Documents and Settings\Administrador\Escritorio\babel_9.1>copy kernel.bin b:\
+BOOT\
+        1 archivos copiados.
+
+C:\Documents and Settings\Administrador\Escritorio\babel_9.1>pause
+Presione una tecla para continuar . . .

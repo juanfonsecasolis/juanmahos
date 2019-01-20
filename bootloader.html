@@ -1,0 +1,34 @@
+<h3>The Bootloader</h3>
+
+<p style="text-align: justify;">In the beginning, I was happily building my little kernel of 33 KB using the Gregor Brunmar tutorial. The things were simple when I was coding the Babel red, white and black screen. But as time went on, I started to manage with the logo of the HOS and later the messages. Fonts and animations are heavy and they take too much space.
+
+When I surpass, without knowing, the 1 Mbyte gap, things stopped working. I was very confused at first, but I remembered a problem that, 2 partners of me, had in university: the lack of space when they introduced strings. The optimization flags of GCC cut down the size of the kernel image but instead graphics quality decreased and sometimes the OS get stuck.
+
+Then, I started to try all pre-made bootloaders for 32 bits that I could download, including simulation with El-Torito (never ran for me). Wasted and sicked, I decided to start working with Grub. After following many How-To guides I reached my goal. 
+
+Simply you need to add the "-T link.ld" option to the line where "ld.exe" is linking the object-code. The name "link.ld" refers to the following file:
+</p>
+
+<p><em><br />ENTRY(start)<br />phys = 0x00100000;<br />SECTIONS<br />{<br />&nbsp; .text phys : AT(phys) {<br />&nbsp;&nbsp;&nbsp; code = .;<br />&nbsp;&nbsp;&nbsp; *(.text)<br />&nbsp;&nbsp;&nbsp; *(.rodata)<br />&nbsp;&nbsp;&nbsp; . = ALIGN(4096);<br />&nbsp; }<br />&nbsp; .data : AT(phys + (data - code))<br />&nbsp; {<br />&nbsp;&nbsp;&nbsp; data = .;<br />&nbsp;&nbsp;&nbsp; *(.data)<br />&nbsp;&nbsp;&nbsp; . = ALIGN(4096);<br />&nbsp; }<br />&nbsp; .bss : AT(phys + (bss - code))<br />&nbsp; {<br />&nbsp;&nbsp;&nbsp; bss = .;<br />&nbsp;&nbsp;&nbsp; *(.bss)<br />&nbsp;&nbsp;&nbsp; . = ALIGN(4096);<br />&nbsp; }<br />&nbsp; end = .;<br />}</em></p>
+
+<div style="text-align: justify;"></div>
+<p style="text-align: justify;">Yes, it is. "link.ld" makes reference to the labels of the "boot.asm" file that developed Brandon F1 and that is available in the "OsDever" page. In "boot.asm" you will need to add the line "call __Z9principalv" after the "stublet" label as above:</p>
+
+<em>stublet:<br />&nbsp;&nbsp;&nbsp; call __Z9principalv<br />&nbsp;&nbsp;&nbsp; jmp $ </em><br />
+
+<p style="text-align: justify;">Where "__Z9principalv" is the name of the main function in your C/C++ code. It seems that the compiler teases you with this name, so just to be sure, use the command: "nm main_file.o", where "main_file" is the name of the file where the main function is located. Compile the "boot.asm" with NASM in the "elf" format and linked it with your C/C++ source.
+
+In my case the compile log is the following:
+</p>
+
+<p style="text-align: justify;">Compile the "boot.asm" with NASM in the "elf" format and linked it with your C/C++ source.</p>
+
+<p style="text-align: justify;">In my case the compile log is the following:</p>
+
+<p><em>%ruta_gnu%\ld -T link.ld -o kernel.o boot.o main.o ports.o video.o hileras.o sonido.o matematica.o<br />%ruta_gnu%\objcopy -R .note -R .comment -S -O binary kernel.o kernel.bin</em></p>
+
+<p style="text-align: justify;">The second line is the idea of Gregor Brunmar. For finish this section, you will need to copy the "kernel.bin" to the directory "~\BOOT\" of a pre-made boot floppy disk of Grub (you can try to build it up from zero by your self too). Safe the content of the virtual floppy disk (ie. mounted by ImDisk) and restore it to a physical drive (using WinImage) or try it with Virtual Box.</p>
+
+<p style="text-align: center;">Grub level, clear!</p>
+<p style="text-align: center;">---------------------------------------------------------------------------------------------------------------------------------</p>
+<p><sup>1</sup>. http://www.osdever.net/bkerndev/Docs/basickernel.htm</p>

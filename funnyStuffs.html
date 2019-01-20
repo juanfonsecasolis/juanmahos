@@ -1,0 +1,21 @@
+<h3>Funny Stuff</h3>
+
+<h4><hr />How to draw a line<hr /></h4>
+
+Using linear algebra we can calculate the equation of the R line as follow:<br /> <br />&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 0P = 0Q + t * v&nbsp; <br /> <br />where:<br />&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; P&nbsp; is any point of the line R<br />&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Q&nbsp; is the reference point that defines R<br /> &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; t * v&nbsp; is the direction vector<br /> &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br />Now, we can compute the R equation given two points: (x1,y1) y (x2,y2) as above:<br />&nbsp;&nbsp;&nbsp; <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0Q + t * 0P = (x1,y1) + t ( (x2,y2) - (x1,y1) )&nbsp; = ( x1 + t (x2-x1), y1 + t (y2-y1) )<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Then:<br /><br />&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;x = x1 + t (x2-x1)<br />&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;y = y1 + t (y2-y1)<br />&nbsp;&nbsp; &nbsp;
+<br />Bingo!, neither X nor Y are restricted by a zero division as happened in y=mx+b.<br /><br /><img src="imagenes/linea.png" alt="" width="600" height="400" /><br />
+<br/>
+
+<h4><hr />How to rotate a square<hr /></h4>
+
+<p>The goal of the algorithm is to draw a square rotated by a theta angle. The point (x0,y0) is the center of the square.</span></p>
+<p></span></p>
+<p>All polygons of side "L" have a radio, in the case of a square, it sizes L/2*sqrt(2).</span></p>
+<p></span></p>
+<img src="imagenes/cuadrado1.png" alt="" width="260" height="281" />
+<div style="text-align: left;">Figure 1.</div>
+<br />Using Pitagoras we have that the diagonal D is:<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; D<sup>2</sup> = L<sup>2</sup> + L<sup>2</sup>, then<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; D = sqrt( 2* L<sup>2</sup> ), then<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; D = L * sqrt(2), because D is a side D&gt;0<br /><br />And the radio is the half of D, then radio = L/2 * sqrt(2). <br /><br />Now, we know that anyone can draw a point (x,y) using polar coordinates, just what we need is a point C, an angle and a radio (hypotenuse h). </span><br />&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br /><img src="imagenes/cuadrado2.png" alt="" width="233" height="240" /><br />
+<div style="text-align: left;">Figure 2.<br /></div>
+<br />We can draw a square using four points, four points corresponding to the four radios of the shape, L * sqrt(2):<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; line1 = (x1,y1) to (x2,y2) <br />&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;line2 = (x2,y2) to (x4,y4)<br />&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;line3 = (x4,y4) to (x3,y3)<br />&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;line4 = (x3,y3) to (x1,y1)</span><br /><br /><img src="imagenes/cuadrado4points.png" alt="" width="301" height="248" /><br />
+<div style="text-align: left;">Figure 3.<br /></div>
+<br />We can use the polar coordinates to find the points of the square where (x0,y0) is the center and L/2 * sqrt(2) is the size of the hypotenuse.&nbsp; To rotate the square theta grades just add theta grades to alpha. The equation is above:<br /><br />&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;x = x0 + cos(alfa+theta) * L* sqrt(2) <br />&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;y = y0 + sen(alfa+theta) * L * sqrt(2)<br />&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br />&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; where alfa: 45,135,225 and 315<br /><br />It is the algorithm, special thanks to the Linear Algebra.</span><br />
